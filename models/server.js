@@ -1,4 +1,5 @@
 const express = require('express')
+const cors = require('cors'); // implementar seguridad
 const { dbConection } = require('../database/config')
 
 class Server{
@@ -6,6 +7,7 @@ class Server{
         this.app = express()
         this.port = process.env.PORT
         this.agendaPath = '/agenda' //Ruta de la API
+        this.middlewares()
         this.routes()
         this.conectarDB()
     }
@@ -19,6 +21,11 @@ class Server{
     }
     routes(){
         this.app.use(this.agendaPath, require('../routes/agenda'))
+    }
+
+    middlewares(){
+        this.app.use( cors() ); //indicar el uso de cors
+
     }
 
     async conectarDB(){
