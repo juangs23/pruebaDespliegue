@@ -12,7 +12,7 @@ const getAgenda = async(req, res ) => {
 }
 
 const postAgenda = async(req, res) => {
-    const datos = req.query //Capturar daros de la url-postman
+    const datos = req.body //Capturar daros de la url-postman
     let mensaje = ''
     try {
         const agenda = new AgendaServicios(datos) // instancia objeto
