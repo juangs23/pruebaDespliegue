@@ -13,14 +13,13 @@ const getAgenda = async(req, res ) => {
 
 const postAgenda = async(req, res) => {
     const datos = req.body //Capturar daros de la url-postman
-    let mensaje = ''
+    let mensaje = 'Inserccion agenda exitosa'
     try {
         const agenda = new AgendaServicios(datos) // instancia objeto
         await agenda.save() //guardar en la bd
-        mensaje = 'Inserccion agenda exitosa'
-        console.log(agenda)  
+        console.log(agenda) 
     } catch (error) {
-        mesaje = error
+        mensaje = error
         console.log (error)
     }
 
@@ -31,7 +30,7 @@ const postAgenda = async(req, res) => {
 }    
 
 const putAgenda = async (req, res) => {
-    const { nombreEmpleado, fechaAgenda, horaInicio, horaFin, descripcionAgenda } = req.query // desectructurar el array con los datos
+    const { nombreEmpleado, fechaAgenda, horaInicio, horaFin, descripcionAgenda } = req.body // desectructurar el array con los datos
     let mensaje = ''
 
     try {

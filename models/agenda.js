@@ -1,36 +1,33 @@
-const {Schema, model } = require ('mongoose')  //Crear modelos en mongo
+const {Schema, model } = require('mongoose')  //Crear modelos en mongo
 
 const agendaServiciosSchema = ({
   
     nombreEmpleado: {
       type: String,
-      unique: true,
-      required: [true, 'El nombre del empleado es requerido'],
-      match: /^[a-zA-Z\s]+$/, // Permitir letras y espacios
-      maxlength: [15, 'El nombre debe contener máximo 15 caracteres'],
+        unique:true,
+        required:[true, 'El nombre del empleado es requirido']
     },
   
 
     fechaAgenda:{
-        type: Date,
-        require: [true, 'La fecha es requerido'] 
+        type: String,
+        required:[true, 'La fecha agenda es requirida']
     },
 
     horaInicio: {
         type: String,
-        required: [true, 'La hora de inicio es requerida'],
+        required:[true, 'La hora inicio es requirida']
       },
 
       horaFin: {
         type: String,
-        required: [true, 'La hora de fin es requerida'],
+        required:[true, 'La hora fin agenda es requirida']
       },
 
     descripcionAgenda:{
         type:String,
-        require:[true, 'La descripcion es requerida'],
-        min:[4, 'La descripcion debe contener minimo 4 caracteres'],
-
+        required:[true, 'La descripcion es requirida']
+        
     },
 
     estadoAgenda: {
