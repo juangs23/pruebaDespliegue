@@ -1,4 +1,4 @@
-const {Schema, model } = require('mongoose')  //Crear modelos en mongo
+const {Schema, model } = require ('mongoose')  //Crear modelos en mongo
 
 const agendaServiciosSchema = ({
   
@@ -8,7 +8,6 @@ const agendaServiciosSchema = ({
         required:[true, 'El nombre del empleado es requirido']
     },
   
-
     fechaAgenda:{
         type: String,
         required:[true, 'La fecha agenda es requirida']
@@ -21,6 +20,7 @@ const agendaServiciosSchema = ({
 
       horaFin: {
         type: String,
+        
         required:[true, 'La hora fin agenda es requirida']
       },
 

@@ -1,5 +1,5 @@
-const {response} = require('express');
-const { model } = require('mongoose');
+const {response} = require('express')
+// const { model } = require('mongoose')
 
 AgendaServicios = require('../models/agenda')
 
@@ -13,29 +13,28 @@ const getAgenda = async(req, res ) => {
 
 const postAgenda = async(req, res) => {
     const datos = req.body //Capturar daros de la url-postman
+
     let mensaje = 'Inserccion agenda exitosa'
     try {
         const agenda = new AgendaServicios(datos) // instancia objeto
         await agenda.save() //guardar en la bd
-        console.log(agenda) 
     } catch (error) {
-        mensaje = error
-        console.log (error)
+        mensaje = error.message;
     }
 
     res.json({
-        msg: mensaje
+        msg: req.body 
     })
 
 }    
 
 const putAgenda = async (req, res) => {
-    const { nombreEmpleado, fechaAgenda, horaInicio, horaFin, descripcionAgenda } = req.body // desectructurar el array con los datos
+    const { nombreEmpleado, fechaAgenda, horaInicio, horaFin, descripcionAgenda, estadoAgenda } = req.body // desectructurar el array con los datos
     let mensaje = ''
 
     try {
         const agenda = await AgendaServicios.findOneAndUpdate({nombreEmpleado: nombreEmpleado}, // Busqueda
-        { fechaAgenda:fechaAgenda, horaInicio:horaInicio, horaFin:horaFin, descripcionAgenda:descripcionAgenda }) // Campos a editar
+        { fechaAgenda:fechaAgenda, horaInicio:horaInicio, horaFin:horaFin, descripcionAgenda:descripcionAgenda, estadoAgenda:estadoAgenda }) // Campos a editar
         mensaje = 'actualizacion exitosa'
 
     } catch (error) {
