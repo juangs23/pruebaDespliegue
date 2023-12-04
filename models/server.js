@@ -8,6 +8,9 @@ class Server{
         this.app = express()
         this.port = process.env.PORT
         this.agendaPath = '/agenda' //Ruta de la API
+        this.registarUsuarioPath = '/registarUsuario' //Ruta de la API
+        this.registarEventoPath = '/registrarEvento'
+        this.authPath = '/login' //Ruta de la API
         this.middlewares()
         this.routes()
         this.conectarDB()
@@ -23,6 +26,9 @@ class Server{
 
     routes(){
         this.app.use(this.agendaPath, require('../routes/agenda'))
+        this.app.use(this.registarUsuarioPath, require('../routes/registroUsuario'))
+        this.app.use(this.registarEventoPath, require('../routes/eventos'))
+        this.app.use(this.authPath, require('../routes/auth'))
     }
 
     middlewares(){

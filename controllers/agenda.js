@@ -1,7 +1,7 @@
 const {response} = require('express')
 // const { model } = require('mongoose')
 
-AgendaServicios = require('../models/agenda')
+const AgendaServicios = require('../models/agenda')
 
 const getAgenda = async(req, res ) => {
     
@@ -22,8 +22,8 @@ const postAgenda = async(req, res) => {
         mensaje = error.message;
     }
 
-    res.json({
-        msg: req.body 
+    res.json({ 
+        msg: mensaje 
     })
 
 }    
@@ -35,7 +35,7 @@ const putAgenda = async (req, res) => {
     try {
         const agenda = await AgendaServicios.findOneAndUpdate({nombreEmpleado: nombreEmpleado}, // Busqueda
         { fechaAgenda:fechaAgenda, horaInicio:horaInicio, horaFin:horaFin, descripcionAgenda:descripcionAgenda, estadoAgenda:estadoAgenda }) // Campos a editar
-        mensaje = 'actualizacion exitosa'
+        mensaje = 'actualizacion exitosa'   
 
     } catch (error) {
         mensaje = error
