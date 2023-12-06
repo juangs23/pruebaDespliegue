@@ -1,5 +1,5 @@
 const express = require('express')
-const cors = require('cors'); // implementar seguridad
+const cors = require('cors'); // permite o restringe las solicitudes
 const bodyParser = require('body-parser') //Paquete convertir el objeto enviando desde el form
 const { dbConection } = require('../database/config')
 
@@ -16,7 +16,7 @@ class Server{
         this.conectarDB()
     }
 
-    listen(){
+    listen(){ // escucha las solicitudes
         this.app.listen(
             this.port, () => {
                 console.log('Escuchando por el puerto '+this.port)

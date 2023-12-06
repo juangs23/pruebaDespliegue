@@ -29,12 +29,12 @@ const postRegistroUsuario = async(req, res) => {
 }    
 
 const putRegistroUsuario = async (req, res) => {
-    const { nombres, apellidos, documento, correo, telefono, edad, direccion, password } = req.body // desectructurar el array con los datos
+    const { nombres, apellidos, documento, correo, telefono, edad, direccion, precioDolar, password } = req.body // desectructurar el array con los datos
     let mensaje = ''
 
     try {
         const usuario = await RegistroUsuario.findOneAndUpdate({nombres: nombres}, // Busqueda
-        { nombres: nombres, apellidos:apellidos, documento:documento, correo:correo, telefono:telefono, edad:edad, direccion:direccion, password:password}) // Campos a editar
+        { nombres: nombres, apellidos:apellidos, documento:documento, correo:correo, telefono:telefono, edad:edad, direccion:direccion, precioDolar:precioDolar, password:password}) // Campos a editar
         mensaje = 'actualizacion exitosa'   
 
     } catch (error) {

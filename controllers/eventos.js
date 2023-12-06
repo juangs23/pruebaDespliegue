@@ -35,7 +35,7 @@ const putEventos = async (req, res) => {
     try {
         const eventos = await EventosGym.findOneAndUpdate({serviciosAgenda: serviciosAgenda}, // Busqueda
         { fechaInicio:fechaInicio, fechaFin:fechaFin, horaInicio:horaInicio, horaFin:horaFin, descripcionAgenda:descripcionAgenda, nombreEmpleado:nombreEmpleado }) // Campos a editar
-        mensaje = 'actualizacion exitosa'   
+        mensaje = 'actualizacion exitosa'
 
     } catch (error) {
         mensaje = `Error al actualizar el evento: ${error.message}`;

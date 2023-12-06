@@ -40,6 +40,11 @@ const registroUsuarioSchema = ({
         required:[true, 'La direccion es requirida']
       },
 
+    precioDolar: {
+        type: Number,
+        required:[true, 'EL precio es requirido']
+      },
+
       password: {
         type: String,
         required:[true, 'La contrasena es requirida']
