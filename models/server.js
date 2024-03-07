@@ -10,6 +10,7 @@ class Server{
         this.agendaPath = '/agenda' //Ruta de la API
         this.registarUsuarioPath = '/registarUsuario' //Ruta de la API
         this.registarEventoPath = '/registrarEvento'
+        this.registrarEjercicioPath = '/registrarEjercicio'
         this.authPath = '/login' //Ruta de la API
         this.middlewares()
         this.routes()
@@ -28,6 +29,7 @@ class Server{
         this.app.use(this.agendaPath, require('../routes/agenda'))
         this.app.use(this.registarUsuarioPath, require('../routes/registroUsuario'))
         this.app.use(this.registarEventoPath, require('../routes/eventos'))
+        this.app.use(this.registrarEjercicioPath, require('../routes/ejercicios'))
         this.app.use(this.authPath, require('../routes/auth'))
     }
 
