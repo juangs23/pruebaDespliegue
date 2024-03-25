@@ -7,7 +7,6 @@ class Server{
     constructor(){
         this.app = express()
         this.port = process.env.PORT
-        this.authPath = '/login'
         this.agendaPath = '/agenda' //Ruta de la API
         this.registarUsuarioPath = '/registarUsuario' 
         this.registarEventoPath = '/registrarEvento'
@@ -30,15 +29,11 @@ class Server{
         this.app.use(this.registarUsuarioPath, require('../routes/registroUsuario'))
         this.app.use(this.registarEventoPath, require('../routes/eventos'))
         this.app.use(this.registrarEjercicioPath, require('../routes/ejercicios'))
-        this.app.use(this.authPath, require('../routes/auth'))
-        this.app.get(this.authPath, (req, res) => {
-            // Aquí puedes enviar algún mensaje o renderizar una página HTML para el inicio de sesión
-            res.send('Página de inicio de sesión')
-        })
+        
     }
 
     middlewares(){
-        this.app.use( cors({origin: '*'}) ) //Indicar el uso de cors
+        this.app.use( cors() ) //Indicar el uso de cors
         this.app.use( bodyParser.json()) //Parsear objetos a insertar desde BD
 
     }
