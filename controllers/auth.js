@@ -1,37 +1,37 @@
-const Usuario = require('../models/registroUsuario')
-const { generarJWT } = require('../')
-const jwt = require ('jsonwebtoken')
+// const bcrypt = require('bcrypt');
+// const jwt = require('jsonwebtoken');
+// const RegistroUsuario = require('../models/registroUsuario');
 
-const login = async(req, res) => {
-    const {correo, password} = req.body
-    const usuarios = await Usuario.findOne({correo})
+// const login = async (req, res) => {
+//     const { correo, password } = req.body;
 
-    try{
-        if (!usuarios) {
-            return res.status(400).json({
-                msg: 'Correo no encontrado'
-            })
-        }
+//     try {
+//         console.log('Correo recibido', correo)
+//         console.log('Contrasena recibida', password)
+//         // Buscar al usuario por correo
+//         const usuario = await RegistroUsuario.findOne({ correo });
 
-        if (password == usuarios.password) {
-            const token = await generarJWT(usuarios)
-            return res.status(200).json({
-                token
-            })
-        }
-        else{
-            return res.status(400).json({
-                msg: 'Contrasena incorrecta'
-            })
-        }
+//         // Si no se encuentra el usuario, enviar un mensaje de error
+//         if (!usuario) {
+//             return res.status(400).json({ msg: 'Credenciales inválidas' });
+//         }
 
-    } catch (error){
-        return res.status(400).json({
-            msg: 'Pailas, contacte al admin'
-        })
-    }
-}
+//         // Verificar la contraseña
+//         const esMatch = await bcrypt.compare(password, usuario.password);
 
-module.exports = {
-    login
-}
+//         // Si la contraseña no coincide, enviar un mensaje de error
+//         if (!esMatch) {
+//             return res.status(400).json({ msg: 'Credenciales inválidas' });
+//         }
+
+//         // Si las credenciales son válidas, generar un token JWT
+//         const token = jwt.sign({ id: usuario._id }, 'secreto', { expiresIn: '1h' });
+
+//         res.json({ token });
+//     } catch (error) {
+//         console.error(error);
+//         res.status(500).send('Error de servidor');
+//     }
+// };
+
+// module.exports = { login };

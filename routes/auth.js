@@ -1,11 +1,8 @@
-const {Router} = require('express')
+const { Router } = require('express');
+const { login } = require('../controllers/auth');
 
-const route = Router()
+const router = Router();
 
+router.post('/login', login);
 
-//Listar todos los datos
-const { login } = require('../controllers/auth')
-
-route.post('/login', login)
-
-module.exports = route
+module.exports = router;
