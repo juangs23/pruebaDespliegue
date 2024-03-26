@@ -11,6 +11,7 @@ class Server{
         this.registarUsuarioPath = '/registarUsuario' 
         this.registarEventoPath = '/registrarEvento'
         this.registrarEjercicioPath = '/registrarEjercicio'
+        this.loginPath = '/login'
         this.middlewares()
         this.routes()
         this.conectarDB()
@@ -29,7 +30,7 @@ class Server{
         this.app.use(this.registarUsuarioPath, require('../routes/registroUsuario'))
         this.app.use(this.registarEventoPath, require('../routes/eventos'))
         this.app.use(this.registrarEjercicioPath, require('../routes/ejercicios'))
-        
+        this.app.use(this.loginPath, require('../routes/Usuario') )
     }
 
     middlewares(){
