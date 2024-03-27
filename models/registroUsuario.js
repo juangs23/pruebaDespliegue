@@ -43,8 +43,12 @@ const registroUsuarioSchema = new mongoose.Schema({
 
 // Método para comparar contraseñas
 registroUsuarioSchema.methods.comparePassword = async function(candidatePassword) {
-    return await bcrypt.compare(candidatePassword, this.password);
+    console.log('Contraseña almacenada en la base de datos:', this.password); // Agregar este mensaje de depuración
+    const isMatch = await bcrypt.compare(candidatePassword, this.password);
+    console.log('Contraseña coincidente:', isMatch); // Agregar este mensaje de depuración
+    return isMatch;
 };
+
 
 // Antes de guardar, encriptar la contraseña
 registroUsuarioSchema.pre('save', async function(next) {

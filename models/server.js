@@ -34,7 +34,8 @@ class Server{
     }
 
     middlewares(){
-        this.app.use( cors() ) //Indicar el uso de cors
+        console.log('Configurando middlewares...')
+        this.app.use(cors({ origin: '*' }))//Indicar el uso de cors
         this.app.use( bodyParser.json()) //Parsear objetos a insertar desde BD
 
     }

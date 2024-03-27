@@ -29,13 +29,18 @@ const postEventos = async(req, res) => {
 }    
 
 const putEventos = async (req, res) => {
-    const { serviciosAgenda, fechaInicio, fechaFin, horaInicio, horaFin, descripcionAgenda, nombreEmpleado } = req.body // desectructurar el array con los datos
+    const { _id, serviciosAgenda, fechaInicio, fechaFin, horaInicio, horaFin, descripcionAgenda, nombreEmpleado } = req.body // desectructurar el array con los datos
     let mensaje = ''
 
     try {
-        const eventos = await EventosGym.findOneAndUpdate({serviciosAgenda: serviciosAgenda}, // Busqueda
-        { fechaInicio:fechaInicio, fechaFin:fechaFin, horaInicio:horaInicio, horaFin:horaFin, descripcionAgenda:descripcionAgenda, nombreEmpleado:nombreEmpleado }) // Campos a editar
+        const eventos = await EventosGym.findOneAndUpdate({_id: _id}, // Busqueda
+        { serviciosAgenda:serviciosAgenda, fechaInicio:fechaInicio, fechaFin:fechaFin, horaInicio:horaInicio, horaFin:horaFin, descripcionAgenda:descripcionAgenda, nombreEmpleado:nombreEmpleado }) // Campos a editar
+
+        if (!eventos) {
+            return res.status(400).json({mensaje: 'No se encontro el evento'})
+        }
         mensaje = 'actualizacion exitosa'
+        return res.status(200).json({mensaje})
 
     } catch (error) {
         mensaje = `Error al actualizar el evento: ${error.message}`;
@@ -49,21 +54,23 @@ const putEventos = async (req, res) => {
 }
 
 const deleteEventos = async (req, res) => {
-    const { serviciosAgenda } = req.query // desectructurar el array con los datos
+    const { id } = req.query // desectructurar el array con los datos
     let mensaje = ''
 
     try {
-        const eventos= await EventosGym.findOneAndDelete({serviciosAgenda:serviciosAgenda}) // Busqueda
+        const eventos= await EventosGym.findOneAndDelete({id}) // Busqueda
+
+        if (!eventos) {
+            return res.status(404).json({mensaje: 'No se encontro el evento'})
+        }
         mensaje = 'eliminacion exitosa'
 
     } catch (error) {
         mensaje = error
+        return res.status(500).json({mensaje})
     }
 
-    res.json({
-        msg: mensaje
-
-    })
+    res.json({msg: mensaje})
 }
 
 
