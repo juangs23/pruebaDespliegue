@@ -5,10 +5,22 @@ const EventosGym = require('../models/eventos')
 
 const getEventos = async(req, res ) => {
     
-    const eventos = await EventosGym.find(); //Obtener todos los documentos de una coleccion
-    res.json({
-        msg: eventos
-    })
+    const {serviciosAgenda} = req.query;
+
+    try {
+        let eventos;
+        // Si se proporciona parametro de busuqeda se filtrara
+        if(serviciosAgenda){
+            eventos = await EventosGym.find({ serviciosAgenda: serviciosAgend })
+        }else{
+            const eventos = await EventosGym.find() //Obtener todos los documentos de una coleccion
+        res.json({
+            msg: eventos
+        })
+        }
+    } catch (error) {
+        res.status(500).json({error:error.message})
+    }
 }
 
 const postEventos = async(req, res) => {
