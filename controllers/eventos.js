@@ -13,7 +13,7 @@ const getEventos = async(req, res ) => {
         if(serviciosAgenda){
             eventos = await EventosGym.find({ serviciosAgenda: serviciosAgenda })
         }else{
-            const eventos = await EventosGym.find() //Obtener todos los documentos de una coleccion
+            eventos = await EventosGym.find() //Obtener todos los documentos de una coleccion
         res.json({
             msg: eventos
         })
