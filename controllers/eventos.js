@@ -11,7 +11,7 @@ const getEventos = async(req, res ) => {
         let eventos;
         // Si se proporciona parametro de busuqeda se filtrara
         if(serviciosAgenda){
-            eventos = await EventosGym.find({ serviciosAgenda: serviciosAgend })
+            eventos = await EventosGym.find({ serviciosAgenda: serviciosAgenda })
         }else{
             const eventos = await EventosGym.find() //Obtener todos los documentos de una coleccion
         res.json({
