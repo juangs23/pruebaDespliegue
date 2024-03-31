@@ -24,17 +24,9 @@ const registroUsuarioSchema = new mongoose.Schema({
         type:Number,
         required:[true, 'el telefono es requerido']
     },
-    edad:{
-        type:Number,
-        required:[true, 'La edad es requerida']
-    },
     direccion: {
         type: String,
         required:[true, 'La direccion es requerida']
-    },
-    precioDolar: {
-        type: Number,
-        required:[true, 'EL precio es requerido']
     },
     password: {
         type: String,
