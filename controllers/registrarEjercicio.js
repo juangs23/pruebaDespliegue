@@ -1,15 +1,26 @@
 const {response} = require('express')
-// const { model } = require('mongoose')
 
-const Ejercicio= require('../models/registrarEjercicio')
+const Ejercicio = require('../models/registrarEjercicio')
 
-// const getEventos = async(req, res ) => {
+const getEjercicio = async(req, res ) => {
     
-//     const eventos = await EventosGym.find(); //Obtener todos los documentos de una coleccion
-//     res.json({
-//         msg: eventos
-//     })
-// }
+    const {nombreEjercicio} = req.query
+    try {
+        let ejercicio
+        //parametro de busqueda
+        if (nombreEjercicio) {
+            ejercicio = await Ejercicio.find({nombreEjercicio: nombreEjercicio})
+        }else{
+            const ejercicio = await Ejercicio.find(); //Obtener todos los documentos de una coleccion
+            res.json({
+                msg: ejercicio
+            })
+        }
+    } catch (error) {
+        res.status(500).json({error:error.message})
+    }
+    
+}
 
 const postEjercicio = async(req, res) => {
     const datos = req.body //Capturar daros de la url-postman
@@ -28,45 +39,53 @@ const postEjercicio = async(req, res) => {
 
 }    
 
-// const putEventos = async (req, res) => {
-//     const { serviciosAgenda, fechaInicio, fechaFin, horaInicio, horaFin, descripcionAgenda, nombreEmpleado } = req.body // desectructurar el array con los datos
-//     let mensaje = ''
+const putEjercicio = async (req, res) => {
+    const { _id, nombreEjercicio, repeticionesEjercicio, descripcionEjercicio } = req.body // desectructurar el array con los datos
+    let mensaje = ''
 
-//     try {
-//         const eventos = await EventosGym.findOneAndUpdate({serviciosAgenda: serviciosAgenda}, // Busqueda
-//         { fechaInicio:fechaInicio, fechaFin:fechaFin, horaInicio:horaInicio, horaFin:horaFin, descripcionAgenda:descripcionAgenda, nombreEmpleado:nombreEmpleado }) // Campos a editar
-//         mensaje = 'actualizacion exitosa'
+    try {
+        const ejercicio = await Ejercicio.findOneAndUpdate({_id: _id}, // Busqueda
+        { nombreEjercicio:nombreEjercicio, repeticionesEjercicio:repeticionesEjercicio, descripcionEjercicio:descripcionEjercicio}) // Campos a editar
+        
 
-//     } catch (error) {
-//         mensaje = `Error al actualizar el evento: ${error.message}`;
-//     }
+        if (!ejercicio) {
+            return res.status(400).json({mensaje: 'No se encontro el ejercicio'})
+        }
+        mensaje = 'actualizacion exitosa'
+
+    } catch (error) {
+        mensaje = `Error al actualizar el ejercicio: ${error.message}`;
+    }
     
 
-//     res.json({
-//         msg: mensaje
+    res.json({
+        msg: mensaje
 
-//     })
-// }
+    })
+}
 
-// const deleteEventos = async (req, res) => {
-//     const { serviciosAgenda } = req.query // desectructurar el array con los datos
-//     let mensaje = ''
+const deleteEjercicio = async (req, res) => {
+    const { id } = req.query // desectructurar el array con los datos
+    let mensaje = ''
 
-//     try {
-//         const eventos= await EventosGym.findOneAndDelete({serviciosAgenda:serviciosAgenda}) // Busqueda
-//         mensaje = 'eliminacion exitosa'
+    try {
+        const ejercicio = await Ejercicio.findOneAndDelete({id}) // Busqueda
+        mensaje = 'eliminacion exitosa'
 
-//     } catch (error) {
-//         mensaje = error
-//     }
+    } catch (error) {
+        mensaje = error
+    }
 
-//     res.json({
-//         msg: mensaje
+    res.json({
+        msg: mensaje
 
-//     })
-// }
+    })
+}
 
 
 module.exports = {
-    postEjercicio
+    postEjercicio,
+    getEjercicio,
+    putEjercicio,
+    deleteEjercicio
 }

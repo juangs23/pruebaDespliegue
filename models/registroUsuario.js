@@ -4,7 +4,6 @@ const bcrypt = require('bcrypt');
 const registroUsuarioSchema = new mongoose.Schema({
     nombres: {
         type: String,
-        unique:true,
         required:[true, 'El nombre es requerido']
     },
     apellidos:{
@@ -13,10 +12,12 @@ const registroUsuarioSchema = new mongoose.Schema({
     },
     documento: {
         type: Number,
+        unique:true,
         required:[true, 'El documento es requerido']
     },
     correo: {
         type: String,
+        unique:true,
         required:[true, 'La hora fin agenda es requerida']
     },
     telefono:{

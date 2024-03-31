@@ -4,11 +4,11 @@ const route = Router()
 
 
 //Listar todos los datos
-const { /*getAgenda, postAgenda, putAgenda, deleteAgenda*/ postEjercicio } = require('../controllers/registrarEjercicio')
+const {  postEjercicio, getEjercicio, putEjercicio, deleteEjercicio } = require('../controllers/registrarEjercicio')
 
-//route.get('/', getAgenda)
+route.get('/', getEjercicio)
 route.post('/', postEjercicio)
-//route.put('/', putAgenda)
-//route.delete('/', deleteAgenda)
+route.put('/', putEjercicio)
+route.delete('/', deleteEjercicio)
 
 module.exports = route;
